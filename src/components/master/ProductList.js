@@ -201,7 +201,7 @@ function ProductList() {
                 </h5>
                 <h6 style={{ margin: "3px 10px 3px 10px", color: "GrayText" }}>
                   {product.ProductCode}
-                  {product.ProductBrand ? ` / ${product.ProductBrand}` : ""}
+                  {/* {product.ProductBrand ? ` / ${product.ProductBrand}` : ""} */}
                 </h6>
               </div>
             </ListItem>
