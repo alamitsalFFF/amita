@@ -64,10 +64,10 @@ function Product() {
   // -------- vMas_Product view definition --------
   const vMas_Product = {
     viewName: "vMas_Product",
-    parameters: [
-      { field: "IsMaterial", value: "1" },
-      { field: "IsService", value: "0" },
-    ],
+    // parameters: [
+    //   { field: "IsMaterial", value: "1" },
+    //   { field: "IsService", value: "0" },
+    // ],
     results: [
       { sourceField: "productID" },
       { sourceField: "productCode" },
@@ -134,7 +134,8 @@ function Product() {
     const fetchProductTypeOptions = async () => {
       try {
         const response = await axios.get(
-          `${API_BASE}/ProductType/GetProductType?isMaterial=true&isService=false`
+          // `${API_BASE}/ProductType/GetProductType?isMaterial=true&isService=false`
+          `${API_BASE}/ProductType/GetProductType`
         );
         setProductTypeOptions(response.data);
       } catch (error) {
@@ -525,7 +526,7 @@ function Product() {
         </div>
 
         {/* Card 4 – Account Configuration */}
-        <div className="product-card account full-width">
+        <div className="product-card account">
           <div className="card-header">
             <div className="card-icon">
               <FontAwesomeIcon icon={faFileInvoiceDollar} />
@@ -533,7 +534,7 @@ function Product() {
             <h3 className="card-title">Account Configuration</h3>
           </div>
           <div className="row">
-            <div className="col-md-4">
+            <div className="col-md-12">
               <div className="form-group">
                 <label className="product-form-label">Asset Account</label>
                 <input
@@ -546,7 +547,7 @@ function Product() {
                 />
               </div>
             </div>
-            <div className="col-md-4">
+            <div className="col-md-12">
               <div className="form-group">
                 <label className="product-form-label">Income Account</label>
                 <input
@@ -559,7 +560,7 @@ function Product() {
                 />
               </div>
             </div>
-            <div className="col-md-4">
+            <div className="col-md-12">
               <div className="form-group">
                 <label className="product-form-label">Expense Account</label>
                 <input
