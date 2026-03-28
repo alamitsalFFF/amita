@@ -14,6 +14,10 @@ import { useState, useEffect } from "react";
 import AccordionQuickBuyAssetMain from "./AccordionQuickBuyAssetMain";
 import AccordionQuickBuyAssetResult from "./AccordionQuickBuyAssetResult";
 import { URL } from "../api/url";
+import DocConfigHeader from "../DataFilters/DocConfigHeader";
+import useDocConfiguration from "../../hooks/useDocConfiguration";
+import FloatingActionBar from "../DataFilters/FloatingActionBar";
+
 
 export default function AccordionQB() {
   const navigate = useNavigate();
@@ -28,15 +32,18 @@ export default function AccordionQB() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentAccDocNo, setCurrentAccDocNo] = useState("");
 
-  const handleGoMenu = () => {
-    navigate(URL);
-  };
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
+  const DocType = `QB`
+  const { categoryOptions, categoryOptionsThai, webAddress, handleGoMenu } = useDocConfiguration(DocType);
+
+  // const handleGoMenu = () => {
+  //   navigate(URL);
+  // };
+  // const scrollToTop = () => {
+  //   window.scrollTo({
+  //     top: 0,
+  //     behavior: "smooth",
+  //   });
+  // };
   // ฟังก์ชันสำหรับเปิด Panel Header
   const handleOpenHeaderPanel = () => {
     setExpandedPanels((prev) => ({
@@ -55,13 +62,18 @@ export default function AccordionQB() {
   };
 
   return (
-    <div>
-      <h2
+    <div style={{ paddingTop: "10px" }}>
+            <DocConfigHeader
+              categoryOptions={categoryOptions}
+              categoryOptionsThai={categoryOptionsThai}
+              handleGoMenu={handleGoMenu}
+            />
+      {/* <h2
         style={{ textAlign: "center", textDecorationLine: "underline" }}
         onClick={handleGoMenu}
       >
         QuickBuy (รายวันซื้อ)
-      </h2>
+      </h2> */}
       <Accordion
         expanded={expandedPanels.panel1}
         onChange={() =>
@@ -72,13 +84,13 @@ export default function AccordionQB() {
         }
       >
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
           aria-controls="panel1-content"
           id="panel1-header"
           style={{ backgroundColor: "#00008b" }}
         // style={{ backgroundColor: "#7bf4a9ab" }}
         >
-          <Typography component="span" style={{ textAlign: "center" }}>
+          <Typography component="span" style={{ textAlign: "center", color: "white" }}>
             Header
           </Typography>
         </AccordionSummary>
@@ -98,13 +110,13 @@ export default function AccordionQB() {
         }
       >
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
           aria-controls="panel2-content"
           id="panel2-header"
           style={{ backgroundColor: "#00008b" }}
         // style={{ backgroundColor: "#7bf4a9ab" }}
         >
-          <Typography component="span" style={{ justifyContent: "center" }}>
+          <Typography component="span" style={{ justifyContent: "center", color: "white"  }}>
             Detail
           </Typography>
         </AccordionSummary>
@@ -118,74 +130,9 @@ export default function AccordionQB() {
       </Accordion>
 
       <div style={{ padding: "30px" }}>&nbsp;</div>
-      <div
-        style={{
-          position: "fixed",
-          bottom: "20px",
-          width: "93%", // กำหนดความกว้างเท่ากับ dashboard
-          //maxWidth: "960px", // กำหนดความกว้างสูงสุดเท่ากับ dashboard
-          left: "50%", // เลื่อนไปกึ่งกลาง
-          transform: "translateX(-50%)", // จัดให้อยู่กึ่งกลางจริงๆ
-          display: "flex",
-          justifyContent: "space-between",
-          padding: "0 20px", // ลด padding ลงเล็กน้อยเพื่อให้พอดี
-        }}
-      >
-        <Box
-          sx={{
-            mb: 3,
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
-            paddingTop: 2,
-            borderRadius: "25px !important",
-          }}
-        >
-          <Button
-            variant="outlined"
-            startIcon={<FaArrowLeft />}
-            onClick={handleGoMenu}
-            sx={{
-              color: "green",
-              borderColor: "green",
-              borderRadius: "25px",
-              "&:hover": {
-                borderColor: "darkgreen",
-                backgroundColor: "rgba(0, 128, 0, 0.04)",
-              },
-            }}
-          >
-            Back
-          </Button>
-        </Box>
-        <Box
-          sx={{
-            mb: 3,
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
-            paddingTop: 2,
-            borderRadius: "25px !important",
-          }}
-        >
-          <Button
-            variant="outlined"
-            endIcon={<FaArrowUp />}
-            onClick={scrollToTop}
-            sx={{
-              color: "green",
-              borderColor: "green",
-              borderRadius: "25px",
-              "&:hover": {
-                borderColor: "darkgreen",
-                backgroundColor: "rgba(0, 128, 0, 0.04)",
-              },
-            }}
-          >
-            Top
-          </Button>
-        </Box>
-      </div>
+      <FloatingActionBar
+        backPath={URL + webAddress}
+      />
     </div>
   );
 }
