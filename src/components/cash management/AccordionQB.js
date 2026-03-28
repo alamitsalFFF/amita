@@ -34,17 +34,6 @@ export default function AccordionQB() {
 
   const DocType = `QB`
   const { categoryOptions, categoryOptionsThai, webAddress, handleGoMenu } = useDocConfiguration(DocType);
-
-  // const handleGoMenu = () => {
-  //   navigate(URL);
-  // };
-  // const scrollToTop = () => {
-  //   window.scrollTo({
-  //     top: 0,
-  //     behavior: "smooth",
-  //   });
-  // };
-  // ฟังก์ชันสำหรับเปิด Panel Header
   const handleOpenHeaderPanel = () => {
     setExpandedPanels((prev) => ({
       ...prev,
